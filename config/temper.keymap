@@ -4,15 +4,22 @@
  * SPDX-License-Identifier: MIT
  */
 
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 1500
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 20
+
 #include <dt-bindings/zmk/mouse.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/pointing.h>
 
 #define Base 0
-#define Raise 1
-#define Lower 2
+#define Lower 1
+#define Raise 2
 #define Nav 3
+#define Mouse 4
+#define ModLower 5
+#define ModRaise 6
 
 &sk { quick-release; };
 
@@ -123,10 +130,10 @@
             label = "Base";
             display-name = "Base";
             bindings = <
-  &kp Q  &kp W  &kp E      &kp R        &kp T                 &kp Y        &kp U      &kp I             &kp O    &kp P
-  &kp A  &kp S  &kp D      &kp F        &kp G                 &kp H        &kp J      &kp K             &kp L    &kp SEMI
-  &kp Z  &kp X  &kp C      &kp V        &kp B                 &kp N        &kp M      &kp COMMA         &kp DOT  &kp FSLH
-                &lt 3 SQT  &mo 1        &kp SPACE             &kp ENTER    &mo 2      &mt LEFT_ALT SQT
+  &lt 4 Q  &kp W  &kp E      &kp R        &kp T                 &kp Y        &kp U      &kp I             &kp O    &kp P
+  &kp A    &kp S  &kp D      &kp F        &kp G                 &kp H        &kp J      &kp K             &kp L    &kp SEMI
+  &kp Z    &kp X  &kp C      &kp V        &kp B                 &kp N        &kp M      &kp COMMA         &kp DOT  &kp FSLH
+                  &mo 5      &mo 1        &kp SPACE             &kp RET      &mo 2      &mo 6
             >;
         };
 
@@ -134,10 +141,10 @@
             label = "Lower";
             display-name = "Lower";
             bindings = <
-  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5         &kp N6  &kp N7  &kp N8  &kp N9  &kp N0
-  &none   &none   &none   &none   &none          &none   &none   &none   &none   &none
-  &trans  &trans  &trans  &trans  &bootloader    &none   &none   &none   &none   &none
-                  &trans  &trans  &trans         &trans  &mo 3   &trans
+  &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT         &kp CARET  &kp AMPS   &kp STAR  &kp LPAR  &kp RPAR
+  &kp F1    &kp F2  &kp F3    &kp F4    &kp F5            &kp F6     &kp UNDER  &kp PLUS  &kp LBRC  &kp RBRC
+  &kp F7    &kp F8  &kp F9    &kp F10   &kp F11           &kp F12    &none   &none   &none   &none
+                  &trans  &trans  &trans                  &trans  &mo 3   &trans
             >;
         };
 
@@ -145,10 +152,10 @@
             label = "Raise";
             display-name = "Raise";
             bindings = <
-  &kp EXCLAMATION  &kp AT        &kp HASH      &kp DOLLAR    &kp PERCENT       &kp CARET     &kp AMPERSAND  &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS
-  &kp TAB          &kp LEFT      &kp DELETE    &kp RIGHT     &bt BT_CLR_ALL    &none         &none          &none         &none                 &none
-  &bt BT_SEL 3     &bt BT_SEL 2  &bt BT_SEL 1  &bt BT_SEL 0  &none             &bootloader   &none          &none         &none                 &none
-                                 &trans        &mo 3         &trans            &none         &trans         &trans
+  &kp N1        &kp N2        &kp N3            &kp N4         &kp N5       &kp N6        &kp N7      &kp N8      &kp N9     &kp N0
+  &none         &kp C_PREV    &kp C_PP          &kp C_NEXT     &none        &none         &kp MINUS   &kp EQUAL   &kp LBKT   &kp LBKT
+  &none         &none         &kp C_VOL_DOWN    &kp C_VOL_UP   &none        &bootloader   &none       &none       &kp DQT    &kp SQT
+                              &trans            &mo 3          &trans       &none         &trans      &trans
             >;
         };
 
@@ -156,10 +163,43 @@
             label = "Nav";
             display-name = "Nav";
             bindings = <
-  &kp ESC  &trans    &kp UP_ARROW    &trans     &trans      &trans          &trans          &kp DEL       &trans           &kp BSPC
-  &kp TAB  &trans    &trans          &trans     &trans      &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &trans
-  &trans   &trans    &trans          &trans     &trans      &trans          &trans          &trans        &trans           &trans
-                     &trans          &trans     &trans      &trans          &trans          &trans
+  &kp ESC       &none         &kp UP_ARROW    &none           &none            &none           &none           &kp DEL       &kp LA(BSPC)     &kp BSPC
+  &kp TAB       &none         &none           &none           &none            &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &none
+  &bt BT_SEL 3  &bt BT_SEL 2  &bt BT_SEL 1    &bt BT_SEL 0    &bt BT_CLR       &kp HOME        &none           &none         &kp END          &none
+                              &trans          &trans          &trans           &trans          &trans          &trans
+            >;
+        };
+
+        mouse {
+            label = "Mouse";
+            display-name = "Mouse";
+            bindings = <
+  &none   &none   &none      &none      &none       &none           &none           &none         &none            &none
+  &none   &none   &mkp RCLK  &mkp LCLK  &none       &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &none
+  &none   &none   &none      &none      &none       &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP  &msc SCRL_RIGHT  &none
+                  &trans     &trans     &trans      &trans          &trans          &trans
+            >;
+        };
+
+        mod_lower {
+            label = "Mod Lower";
+            display-name = "Mod Lower";
+            bindings = <
+  &none       &none      &none          &none      &none         &none      &none     &none         &none            &none
+  &kp RCTRL   &kp LALT   &kp LSHFT      &kp LGUI   &none         &none      &none     &none         &none            &none
+  &none       &none      &none          &none      &none         &none      &none     &none         &none            &none
+                         &trans         &trans     &trans        &trans     &trans    &trans
+            >
+        };
+
+        mod_raise {
+            label = "Mod Raise";
+            display-name = "Mod Raise";
+            bindings = <
+  &none   &none   &none      &none      &none         &none       &none       &none      &none      &none
+  &none   &none   &none      &none      &none         &none       &kp RGUI    &kp RSHFT  &kp RALT   &kp RCTRL
+  &none   &none   &none      &none      &none         &none       &none       &none      &none      &none
+                  &trans     &trans     &trans        &trans      &trans      &trans
             >;
         };
     };
