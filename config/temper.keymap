@@ -116,22 +116,22 @@
     conditional_layers {
         compatible = "zmk,conditional-layers";
         tri_layer {
-            if-layers = <2 3>;
-            then-layer = <4>;
+            if-layers = <3 4>;
+            then-layer = <5>;
         };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        base_hrm {
-            label = "Base HRM";
-            display-name = "Base HRM";
+        base {
+            label = "Base";
+            display-name = "Base";
             bindings = <
-  &lt 5 Q       &kp W         &kp E         &kp R        &kp T        &kp Y        &kp U          &kp I           &kp O          &kp P
-  &hml LCTRL A  &hmls LALT S  &hml LSHFT D  &hml LGUI F  &kp G        &kp H        &hmrgs RGUI J  &hmrgs RSHFT K  &hmra RALT L   &hmrc RCTRL SEMI
-  &kp Z         &kp X         &kp C         &kp V        &kp B        &kp N        &kp M          &kp COMMA       &kp DOT        &kp FSLH
-                              &mo 7         &mo 3        &kp SPACE    &kp RET      &mo 4          &mo 8
+  &lt 6 Q       &kp W         &kp E         &kp R        &kp T         &kp Y        &kp U          &kp I           &kp O          &kp P
+  &hml LCTRL A  &hmls LALT S  &hml LSHFT D  &hml LGUI F  &kp G         &kp H        &hmrgs RGUI J  &hmrgs RSHFT K  &hmra RALT L   &hmrc RCTRL SEMI
+  &kp Z         &kp X         &kp C         &kp V        &kp B         &kp N        &kp M          &kp COMMA       &kp DOT        &kp FSLH
+                              &mo 7         &mo 3        &kp SPACE     &kp RET      &mo 4          &mo 8
             >;
         };
 
@@ -139,7 +139,7 @@
             label = "Qwerty";
             display-name = "Qwerty";
             bindings = <
-  &lt 5 Q  &kp W  &kp E   &kp R   &kp T        &kp Y      &kp U    &kp I      &kp O    &kp P
+  &lt 6 Q  &kp W  &kp E   &kp R   &kp T        &kp Y      &kp U    &kp I      &kp O    &kp P
   &kp A    &kp S  &kp D   &kp F   &kp G        &kp H      &kp J    &kp K      &kp L    &kp SEMI
   &kp Z    &kp X  &kp C   &kp V   &kp B        &kp N      &kp M    &kp COMMA  &kp DOT  &kp FSLH
                   &trans  &trans  &trans       &trans     &trans   &trans
@@ -150,7 +150,7 @@
             label = "Colemak";
             display-name = "Colemak";
             bindings = <
-  &lt 5 Q       &kp W        &kp F         &kp P        &kp B             &kp J        &kp L          &kp U           &kp Y          &kp SEMI
+  &lt 6 Q       &kp W        &kp F         &kp P        &kp B             &kp J        &kp L          &kp U           &kp Y          &kp SEMI
   &hml LCTRL A  &hml LALT R  &hml LSHFT S  &hml LGUI T  &kp G             &kp K        &hmrgs RGUI N  &hmrgs RSHFT E  &hmra RALT I   &hmrc RCTRL O
   &kp Z         &kp X        &kp C         &kp D        &kp V             &kp M        &kp H          &kp COMMA       &kp DOT        &kp FSLH
                              &trans        &trans       &trans            &trans       &trans         &trans
@@ -203,7 +203,7 @@
 
         mod_lower {
             label = "Mod Lower";
-            display-name = "Mod Lower";
+            display-name = "M-Lower";
             bindings = <
   &none       &none      &none          &none      &none           &none      &none     &none         &none            &none
   &kp RCTRL   &kp LALT   &kp LSHFT      &kp LGUI   &none           &none      &none     &none         &none            &none
@@ -214,7 +214,7 @@
 
         mod_raise {
             label = "Mod Raise";
-            display-name = "Mod Raise";
+            display-name = "M-Raise";
             bindings = <
   &none   &none   &none      &none      &none         &none       &none       &none      &none      &none
   &none   &none   &none      &none      &none         &none       &kp RGUI    &kp RSHFT  &kp RALT   &kp RCTRL
