@@ -47,10 +47,10 @@
             #binding-cells = <2>;
             flavor = "hold-preferred";
             require-prior-idle-ms = <90>;
-            tapping-term-ms = <150>;
-            quick-tap-ms = <130>;
+            tapping-term-ms = <140>;
+            quick-tap-ms = <125>;
             bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = < 5 6 7 19 12 13 25 26 27 28 29 30 31 33 34 35 13 >; // 10 11 12 15 16 17 18 21 22 23 8 9
+            hold-trigger-key-positions = < 5 6 7 10 19 12 13 25 26 27 28 29 30 31 33 34 35 13 >; // 10 11 12 15 16 17 18 21 22 23 8 9
             global-quick-tap;
         };
 
@@ -106,10 +106,15 @@
     combos {
         compatible = "zmk,combos";
 
-        b {
+        tab {
             bindings = <&kp TAB>;
             key-positions = <0 10>;
             timeout-ms = <30>;
+        };
+
+        lang_switch {
+            bindings = <&kp LC(SPACE)>;
+            key-positions = <19 32>;
         };
     };
 
@@ -205,10 +210,10 @@
             label = "Mod Lower";
             display-name = "M-Lower";
             bindings = <
-  &none       &none      &none          &none      &none           &none      &none     &none         &none            &none
-  &kp RCTRL   &kp LALT   &kp LSHFT      &kp LGUI   &none           &none      &none     &none         &none            &none
-  &none       &none      &none          &none      &bootloader     &none      &none     &none         &none            &none
-                         &trans         &tog 1     &trans          &trans     &trans    &trans
+  &none       &none      &none          &none      &none           &none      &none      &none      &none      &none
+  &kp RCTRL   &kp LALT   &kp LSHFT      &kp LGUI   &none           &none      &kp RGUI   &kp RSHFT  &kp RALT   &kp RCTRL
+  &none       &none      &none          &none      &bootloader     &none      &none      &none      &none      &none
+                         &trans         &tog 1     &trans          &trans     &trans     &trans
             >;
         };
 
@@ -216,10 +221,10 @@
             label = "Mod Raise";
             display-name = "M-Raise";
             bindings = <
-  &none   &none   &none      &none      &none         &none       &none       &none      &none      &none
-  &none   &none   &none      &none      &none         &none       &kp RGUI    &kp RSHFT  &kp RALT   &kp RCTRL
-  &none   &none   &none      &none      &none         &bootloader &none       &none      &none      &none
-                  &trans     &trans     &trans        &trans      &tog 2      &trans
+  &none       &none      &none       &none      &none        &none       &none      &none      &none      &none
+  &kp RCTRL   &kp LALT   &kp LSHFT   &kp LGUI   &none        &none       &kp RGUI   &kp RSHFT  &kp RALT   &kp RCTRL
+  &none       &none      &none       &none      &none        &bootloader &none      &none      &none      &none
+                         &trans      &trans     &trans       &trans      &tog 2     &trans
             >;
         };
     };
